@@ -2,6 +2,8 @@ package warpprof
 
 import (
 	"fmt"
+	"net/http"
+	_ "net/http/pprof"
 	"os"
 	"runtime/pprof"
 	"time"
@@ -16,4 +18,8 @@ func PprofMemory(frequent int) {
 		pprof.WriteHeapProfile(fm)
 		time.Sleep(time.Second * time.Duration(frequent))
 	}
+}
+
+func ListenAndServe(addr string, handler http.Handler) {
+	http.ListenAndServe(addr, handler)
 }
